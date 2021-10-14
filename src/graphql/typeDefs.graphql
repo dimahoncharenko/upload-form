@@ -1,0 +1,40 @@
+scalar Date
+scalar Upload
+
+enum PhotoCategory {
+    PORTRAIT
+    SELFIE
+    ACTION
+} 
+
+input PhotoArgs {
+    category: PhotoCategory!
+    description: String
+    file: Upload!
+}
+
+type Photo {
+    id: ID!
+    url: String!
+    createdAt: Date!
+    category: PhotoCategory!
+    description: String
+} 
+
+type Query {
+    allPhotos: [Photo!]!
+}
+
+type Mutation {
+    postPhoto(input: PhotoArgs!): Photo!
+}
+
+type Subscription {
+    newPhoto: Photo!
+}
+
+schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+}
